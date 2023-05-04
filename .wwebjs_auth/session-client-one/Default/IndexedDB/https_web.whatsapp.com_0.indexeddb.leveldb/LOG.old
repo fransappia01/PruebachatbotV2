@@ -1,0 +1,5 @@
+2023/05/04-12:34:47.060 1df6 Reusing MANIFEST /home/fran/Documentos/PruebaChatbot/.wwebjs_auth/session-client-one/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2023/05/04-12:34:47.060 1df6 Recovering log #78
+2023/05/04-12:34:47.182 1df6 Reusing old log /home/fran/Documentos/PruebaChatbot/.wwebjs_auth/session-client-one/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000078.log 
+2023/05/04-12:34:47.182 1df6 Delete type=2 #79
+2023/05/04-12:34:47.182 1df6 Delete type=2 #76
