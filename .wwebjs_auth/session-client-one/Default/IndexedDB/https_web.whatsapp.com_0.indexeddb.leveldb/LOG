@@ -1,3 +1,12 @@
-2023/05/04-12:49:09.893 2064 Reusing MANIFEST /home/fran/Documentos/PruebaChatbot/.wwebjs_auth/session-client-one/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2023/05/04-12:49:09.893 2064 Recovering log #78
-2023/05/04-12:49:10.079 2064 Reusing old log /home/fran/Documentos/PruebaChatbot/.wwebjs_auth/session-client-one/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000078.log 
+2023/05/04-20:55:51.542 23d2 Reusing MANIFEST /home/fran/Documentos/PruebaChatbot/.wwebjs_auth/session-client-one/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2023/05/04-20:55:51.543 23d2 Recovering log #86
+2023/05/04-20:55:51.702 23d2 Reusing old log /home/fran/Documentos/PruebaChatbot/.wwebjs_auth/session-client-one/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000086.log 
+2023/05/04-20:57:46.689 23d7 Level-0 table #91: started
+2023/05/04-20:57:46.762 23d7 Level-0 table #91: 1272123 bytes OK
+2023/05/04-20:57:46.769 23d7 Delete type=0 #86
+2023/05/04-20:57:46.922 23d9 Compacting 1@1 + 1@2 files
+2023/05/04-20:57:47.118 23d9 Generated table #92@1: 46349 keys, 1655239 bytes
+2023/05/04-20:57:47.118 23d9 Compacted 1@1 + 1@2 files => 1655239 bytes
+2023/05/04-20:57:47.121 23d9 compacted to: files[ 0 0 1 0 0 0 0 ]
+2023/05/04-20:57:47.121 23d9 Delete type=2 #91
+2023/05/04-20:57:47.121 23d9 Delete type=2 #88
