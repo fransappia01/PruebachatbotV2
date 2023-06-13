@@ -1,6 +1,8 @@
 const qrcode = require('qrcode-terminal');
 const { client } = require('./src/session');
-const { connection, connectToDatabase } = require('./src/database');
+const { connection, connectToDatabase, pool } = require('./src/database');
+
+const url = ''
 
 connectToDatabase()
 
@@ -33,6 +35,7 @@ client.on('message', async (msg) => {
       }
     });
   }
+ 
 });
 
 client.initialize();

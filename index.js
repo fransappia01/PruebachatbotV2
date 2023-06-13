@@ -1,16 +1,40 @@
-const {client} = require('./src/session');
-const {connection, connectToDatabase} = require('./src/database')
-// const {manejarSolicitandoDatos, cancelarTurno, obtenerDatosCliente, numeroTurno} = require ('./src/utils')
+const qrcode = require('qrcode-terminal');
+const { Client, LegacySessionAuth, LocalAuth } = require('whatsapp-web.js');
+const fs = require('fs');
+const path = require('path');
+const mysql = require('mysql');
 
-
-//Defino variables
-
+// Defino variables
 let estado = 'inicio';  
 let nombre = '';
 let dni = '';
-//let numeroTurno;
 let clientesEnEspera = [];
 let sessionData;
+
+
+// Conexión a la base de datos
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '1234',
+  database: 'gestion_turnos'
+});
+
+// Con esto no hace falta poner el QR desde un celular ya autenticado
+const client = new Client({
+     authStrategy: new LocalAuth({
+          clientId: "client-one" 
+     })
+})
+
+  client.on('qr', (qr) => {
+    // Generar y escanear este código con tu teléfono
+    qrcode.generate(qr, { small: true });
+  });
+
+  client.on('authenticated', (session) => {
+    console.log('Sesión autenticada');
+  });
 
 
 // Aca comienza el flujo de mensajes
@@ -29,6 +53,7 @@ client.on('message', async (msg) => {
         '4. Salir'
     );
  }
+
  
  else if (estado === 'inicio' && msg.body === '1') {
     // Manejar la opción 1
@@ -44,41 +69,41 @@ client.on('message', async (msg) => {
  // Manejo del estado solicitandoDatos
  else if (estado === 'solicitandoDatos') {
 
-     // Obtener los datos del cliente del mensaje anterior
-     const datosCliente = msg.body.split('\n');
-     nombre = datosCliente[0];
-     dni = datosCliente[1];
- 
-     // Verificar si el mensaje está vacío
-     if (!nombre || !nombre.replace(/\s/g, '').length || !dni || !dni.replace(/\s/g, '').length) {
-       await client.sendMessage(
-         msg.from,
-         'Por favor, asegúrate de ingresar tu nombre y tu DNI para continuar.');
-       return;
-     }
- 
-     // Validar digitos del DNI
-     if (dni.length !== 8) {
-       await client.sendMessage(
-         msg.from,
-         'El DNI debe tener 8 dígitos. Por favor, inténtalo nuevamente.');
- 
-       estado = 'solicitandoDatos';
-       return;
-     } else {
- 
-       // MANEJO DE OPCION 1
-       await client.sendMessage(
-         msg.from,
-         `¡Gracias, ${nombre}! Por favor, elige el tipo de servicio que deseas:\n` +
-           '1. Cambio de aceite\n' +
-           '2. Cambio de neumáticos\n' +
-           '3. Revisión general\n' +
-           '4. Salir'
-       );
-       estado = 'SolicitandoServicio';
-     }
-  } 
+    // Obtener los datos del cliente del mensaje anterior
+    const datosCliente = msg.body.split('\n');
+    nombre = datosCliente[0];
+    dni = datosCliente[1];
+
+    // Verificar si el mensaje está vacío
+    if (!nombre || !nombre.replace(/\s/g, '').length || !dni || !dni.replace(/\s/g, '').length) {
+      await client.sendMessage(
+        msg.from,
+        'Por favor, asegúrate de ingresar tu nombre y tu DNI para continuar.');
+      return;
+    }
+
+    // Validar digitos del DNI
+    if (dni.length !== 8) {
+      await client.sendMessage(
+        msg.from,
+        'El DNI debe tener 8 dígitos. Por favor, inténtalo nuevamente.');
+
+      estado = 'solicitandoDatos';
+      return;
+    } else {
+
+      // MANEJO DE OPCION 1
+      await client.sendMessage(
+        msg.from,
+        `¡Gracias, ${nombre}! Por favor, elige el tipo de servicio que deseas:\n` +
+          '1. Cambio de aceite\n' +
+          '2. Cambio de neumáticos\n' +
+          '3. Revisión general\n' +
+          '4. Salir'
+      );
+      estado = 'SolicitandoServicio';
+    }
+ } 
 
  // Manejo del estado SolicitandoServicio
  else if (estado == 'SolicitandoServicio' && msg.body === '1' ){
@@ -100,11 +125,12 @@ else if (estado == 'SolicitandoServicio' && msg.body === '3' ){
 );
 }
 else if (estado == 'SolicitandoServicio' && msg.body === '4' ){
+
   await client.sendMessage(
      msg.from,
      'Gracias por haberte comunicado con nosotros.¡Hasta la proxima!'
 );
-} 
+}
 
 // MANEJO DE OPCION 2
 else if (estado === 'inicio' && msg.body === '2') {
@@ -286,7 +312,4 @@ else if (estado === 'inicio' && msg.body === '3') {
 
 client.initialize();        
 
-module.exports = {
-  nombre,
-  dni
-};
+// revisar la opcion con la base de datos
