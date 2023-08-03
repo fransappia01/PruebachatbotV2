@@ -6,15 +6,19 @@ const mysql = require('mysql');
 const {connection, connectToDatabase} = require('./database')
 
 
-  const client = new Client({
-  authStrategy: new LocalAuth({
-          clientId: "client-one" 
-       })
-  })
-
 //  const client = new Client({
-//  clientId: "client-o"
+//  authStrategy: new LocalAuth({
+//          clientId: "client-one" 
+//       })
 //  })
+
+  const client = new Client({
+  clientId: "client-o",
+  puppeteer: {
+    headless: true,
+    args: ['--no-sandbox']
+}
+  })
 
   client.on('qr', (qr) => {
     // Generar y escanear este código qr
