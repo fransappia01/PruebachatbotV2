@@ -1,4 +1,4 @@
-const { client } = require('./src/session');
+const { client } = require('./src/session')
 const { getSMS, getWorkshopNameByPhone, getAppointmentStatusByPhone } = require('./src/functions');
 
 // Variables para controlar el flujo de ejecución de la respuesta del taller, almaceno el cambio de estados.

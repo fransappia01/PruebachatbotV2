@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generar código QR</title>
+</head>
+<body>
+  <h1>Generar código QR</h1>
+  <button onclick="obtenerCodigoQR()">Obtener mi código QR</button>
+  <div id="qrContainer"></div>
+
+  <script>
+    function obtenerCodigoQR() {
+      // Mostrar mensaje "Generando código QR"
+      document.getElementById('qrContainer').innerText = 'Generando código QR...';
+  
+      // Realizar la solicitud para obtener el código QR utilizando fetch
+      fetch('/codigoqr')
+        .then(response => response.text())
+        .then(qrHtml => {
+          // Mostrar el código QR en el contenedor
+          document.getElementById('qrContainer').innerHTML = qrHtml;
+        })
+        .catch(error => {
+          console.error('Error al obtener el código QR:', error);
+          // Mostrar un mensaje de error en caso de que ocurra algún problema
+          document.getElementById('qrContainer').innerText = 'Error al obtener el código QR';
+        });
+    }
+  </script>
+</body>
+</html>
