@@ -1,3 +1,8 @@
 node_modules
 .wwebjs_auth
 .cache
+.cache/puppeteer/chrome/win64-115.0.5790.102/chrome-win64
+.cache/puppeteer/chrome/win64-115.0.5790.102/chrome-win64/
+.cache/puppeteer/chrome/win64-115.0.5790.102/chrome-win64/chrome.dll
+.cache/
+cache

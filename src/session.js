@@ -9,7 +9,7 @@ let qrImage; // Variable para almacenar el código QR generado
 puppeteer.launch({ignoreDefaultArgs: ['--disable-extensions']})
 
 const client = new Client({
-  authStrategy: new LocalAuth(),
+  clientId: "client-o",
   puppeteer: {
     args: ['--no-sandbox','--disable-setuid-sandbox'],
     ignoreDefaultArgs: ['--disable-extensions'],

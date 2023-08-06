@@ -1,13 +1,21 @@
-const { client } = require('./src/session')
-const { getSMS, getWorkshopNameByPhone, getAppointmentStatusByPhone } = require('./src/functions');
+const express = require("express");
+const app = express();
+const { client } = require("./src/session"); // Importa el cliente de WhatsApp
+const { getSMS, getWorkshopNameByPhone, getAppointmentStatusByPhone } = require("./src/functions");
+
+const port = process.env.PORT || 3000; // Escucha en el puerto proporcionado por FL0 o el puerto 3000 por defecto
+
+// Escucha en el puerto definido
+app.listen(port, () => {
+  console.log(`App listening on port ${port}`);
+});
 
 // Variables para controlar el flujo de ejecución de la respuesta del taller, almaceno el cambio de estados.
 let isWaitingForWorkshopName = false;
 //let isWaitingForAppointmentNumber = false;
 let workshopName;
 
-
-client.on('message', async (msg) => {
+client.on("message", async (msg) => {
   const phone_number = msg.to.replace('@c.us', '');
 
   if (msg.body === '12345') {
@@ -31,7 +39,7 @@ client.on('message', async (msg) => {
   }
 
   // Si se está esperando el nombre del taller, procesar el mensaje según la opción seleccionada
-  if (isWaitingForWorkshopName = true) {
+  if (isWaitingForWorkshopName) {
     switch (msg.body) {
       case '1':
         console.log('opcion 1')
@@ -97,4 +105,4 @@ client.on('message', async (msg) => {
   }
 });
 
-client.initialize();
+client.initialize(); // Inicializa el cliente de WhatsApp
