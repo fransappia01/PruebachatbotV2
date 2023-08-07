@@ -11,6 +11,9 @@
   <div id="qrContainer"></div>
 
   <script>
+    const intervalo = setInterval(obtenerCodigoQR,20000);
+    console.log("llamado",intervalo)
+    
     function obtenerCodigoQR() {
       // Mostrar mensaje "Generando código QR"
       document.getElementById('qrContainer').innerText = 'Generando código QR...';
@@ -20,7 +23,13 @@
         .then(response => response.text())
         .then(qrHtml => {
           // Mostrar el código QR en el contenedor
+          console.log("qrHtml",qrHtml)
+          if(qrHtml!="Generando código QR..."){
           document.getElementById('qrContainer').innerHTML = qrHtml;
+        }else{
+          
+
+        }
         })
         .catch(error => {
           console.error('Error al obtener el código QR:', error);
@@ -29,5 +38,26 @@
         });
     }
   </script>
+
+
+<style>
+  .loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: gray;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  display: none;
+}
+
+.loading--show {
+  display: flex;
+}
+</style>
 </body>
 </html>

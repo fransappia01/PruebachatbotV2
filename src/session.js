@@ -6,7 +6,23 @@ const { Client, LocalAuth } = require('whatsapp-web.js');
 const app = express();
 let qrImage; // Variable para almacenar el código QR generado
 
-puppeteer.launch({ignoreDefaultArgs: ['--disable-extensions']})
+puppeteer.launch({ignoreDefaultArgs: ['--disable-extensions'], 
+                  args: ['--no-sandbox','--disable-setuid-sandbox'],
+                  ignoreHTTPSErrors: true,
+                  defaultViewport: null,
+                  // Ignorar propiedades y funciones específicas durante la evaluación
+                  // para evitar errores
+                  ignoreDefaultViewport: true,
+                  ignoreCache: true,
+                  extraHTTPHeaders: {
+                    'Accept-Language': 'en'
+                  },
+                  executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+                  headless: true,
+                  devtools: false,
+                  userDataDir: null
+})
+
 
 const client = new Client({
   clientId: "client-o",
@@ -50,14 +66,16 @@ client.on('ready', () => {
 client.initialize();
 
 // Ruta para obtener el código QR
+
 app.get('/codigoqr', (req, res) => {
+  console.log(qrImage)
   if (qrImage) {
     // Si el cliente está listo, ya se generó el código QR y se envió en el evento 'qr'
     console.log('QR listo');
     res.send(`<img src="${qrImage}" alt="WhatsApp QR Code" />`);
   } else {
     // Si el cliente aún no está listo, envía un mensaje temporal
-    res.send('Generando código QR...');
+    res.send(`<div class="loading loading--show">Cargando qr</div> `);
   }
 });
 
@@ -79,8 +97,8 @@ function startServer() {
 }
 
 // Función para detener el servidor
-function stopServer() {
-  if (server) {
+if (server) {
+    function stopServer() {
     server.close(() => {
       console.log('Servidor detenido');
     });
