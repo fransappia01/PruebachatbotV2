@@ -6,8 +6,12 @@ const { Client, LocalAuth } = require('whatsapp-web.js');
 const app = express();
 let qrImage; // Variable para almacenar el código QR generado
 
-puppeteer.launch({ignoreDefaultArgs: ['--disable-extensions'], args: ['--no-sandbox','--disable-setuid-sandbox']})
+//puppeteer.launch({ignoreDefaultArgs: ['--disable-extensions'], args: ['--no-sandbox','--disable-setuid-sandbox']})
 
+(async () => {
+	const browser = await puppeteer.launch();
+	await browser.close();
+})();
 
 const client = new Client({
   clientId: "client-o",
