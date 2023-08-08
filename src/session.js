@@ -6,22 +6,7 @@ const { Client, LocalAuth } = require('whatsapp-web.js');
 const app = express();
 let qrImage; // Variable para almacenar el código QR generado
 
-puppeteer.launch({ignoreDefaultArgs: ['--disable-extensions'], 
-                  args: ['--no-sandbox','--disable-setuid-sandbox'],
-                  ignoreHTTPSErrors: true,
-                  defaultViewport: null,
-                  // Ignorar propiedades y funciones específicas durante la evaluación
-                  // para evitar errores
-                  ignoreDefaultViewport: true,
-                  ignoreCache: true,
-                  extraHTTPHeaders: {
-                    'Accept-Language': 'en'
-                  },
-                  executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-                  headless: true,
-                  devtools: false,
-                  userDataDir: null
-})
+puppeteer.launch({ignoreDefaultArgs: ['--disable-extensions'], args: ['--no-sandbox','--disable-setuid-sandbox']})
 
 
 const client = new Client({
@@ -38,7 +23,7 @@ const client = new Client({
     extraHTTPHeaders: {
       'Accept-Language': 'en'
     },
-    executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+    executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe', // no se esta detectando
     headless: true,
     devtools: false,
     userDataDir: null
