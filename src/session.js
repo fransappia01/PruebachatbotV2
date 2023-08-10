@@ -24,7 +24,7 @@ const client = new Client({
       'Accept-Language': 'en'
     },
     executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe', // no se esta detectando
-    headless: 'new',
+    headless: "new",
     devtools: false,
     userDataDir: null
   }
