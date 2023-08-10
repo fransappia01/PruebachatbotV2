@@ -8,6 +8,9 @@
   <title>Código QR</title>
 </head>
 <body>
+  <div class="imagen-principal">
+    <img src="../img/TuneUpLogo.png">
+  </div>
   <div class="container">
     <div class="left-content">
       <h1>Generar código QR</h1>
@@ -24,8 +27,8 @@
     var flag=false;
 
     // Funcion para setear la flag y mostrar la alerta de error cada  vez que aprieta el boton, si es necesario
+    flag=true;
     function cont(){
-      flag=true;
       obtenerCodigoQR();
     }
 
@@ -77,6 +80,12 @@
     min-height: 100vh;
     background: linear-gradient(to bottom, #ff705f, #fa5f4e);
     position: relative;
+  }
+  .imagen-principal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px; 
   }
   .container {
     display: flex;
