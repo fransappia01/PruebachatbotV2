@@ -7,7 +7,7 @@ const path = require('path');
 const app = express();
 let qrImage; // Variable para almacenar el código QR generado
 
-puppeteer.launch({ignoreDefaultArgs: ['--disable-extensions'], args: ['--no-sandbox','--disable-setuid-sandbox']})
+puppeteer.launch({ignoreDefaultArgs: ['--disable-extensions'], args: ['--no-sandbox','--disable-setuid-sandbox'], headless: 'new'})
 
 const client = new Client({
   clientId: "client-o",
@@ -24,7 +24,7 @@ const client = new Client({
       'Accept-Language': 'en'
     },
     executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe', // no se esta detectando
-    headless: "new",
+    headless: true,
     devtools: false,
     userDataDir: null
   }
