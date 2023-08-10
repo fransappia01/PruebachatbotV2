@@ -3,56 +3,148 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Generar código QR</title>
+  <link rel="stylesheet" type="text/css" href = "style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.6/dist/sweetalert2.min.css">
+  <title>Código QR</title>
 </head>
 <body>
-  <h1>Generar código QR</h1>
-  <button onclick="obtenerCodigoQR()">Obtener mi código QR</button>
-  <div id="qrContainer"></div>
+  <div class="container">
+    <div class="left-content">
+      <h1>Generar código QR</h1>
+      <button onclick="cont()">Obtener mi código QR</button>
+    </div>
+    <div class="right-content">
+      <div id="qrContainer"></div>
+    </div>
+  </div>
 
   <script>
-    const intervalo = setInterval(obtenerCodigoQR,20000);
-    console.log("llamado",intervalo)
-    
+
+    var flag=false;
+
+    // Funcion para setear la flag y mostrar la alerta de error cada  vez que aprieta el boton
+    function cont(){
+      flag=true;
+      obtenerCodigoQR();
+    }
+
+    // Funcion para generar el codigo QR
     function obtenerCodigoQR() {
+
+      const intervalo = setInterval(obtenerCodigoQR,20000);
       // Mostrar mensaje "Generando código QR"
-      document.getElementById('qrContainer').innerText = 'Generando código QR...';
+      document.getElementById('qrContainer').innerText = '.';
   
       // Realizar la solicitud para obtener el código QR utilizando fetch
       fetch('/codigoqr')
         .then(response => response.text())
         .then(qrHtml => {
           // Mostrar el código QR en el contenedor
-          console.log("qrHtml",qrHtml)
-          if(qrHtml!="Generando código QR..."){
+          // console.log("qrHtml",qrHtml)
+          if(qrHtml!="."){
           document.getElementById('qrContainer').innerHTML = qrHtml;
-        }else{
-          
-
         }
         })
         .catch(error => {
           console.error('Error al obtener el código QR:', error);
-          // Mostrar un mensaje de error en caso de que ocurra algún problema
-          document.getElementById('qrContainer').innerText = 'Error al obtener el código QR';
+          
+          if(flag!=false){
+            ShowAlert();
+            flag=false
+          }
+        
         });
     }
+
+    // funcion que da error al generar QR
+    function ShowAlert(){
+        Swal.fire({
+            icon: 'error',
+            title: 'Error al generar el código QR',
+            text: 'Ha ocurrido un error al generar el código QR. Inténtalo nuevamente.',
+        });
+    }
+
   </script>
 
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.6/dist/sweetalert2.all.min.js"></script>
 
 <style>
+  body {
+    margin: 0;
+    display: flex;
+    align-items: center; 
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #ff705f, #fa5f4e);
+    position: relative;
+  }
+  .container {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    width: 100%;
+  }
+  
+  .left-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    padding-left: 20%; 
+  }
+  
+  .right-content {
+    flex: 1;
+    display: flex;
+    justify-content: center; 
+    padding-right: 25%; 
+  }
+  
+  .fixed-text {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 1rem;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+  }
+  h1 {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 1rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+  button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #0a0000;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+  button:hover {
+  background-color: #311111;
+}
+  #qrContainer {
+  margin-top: 1rem;
+}  
   .loading {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: gray;
+  background: #ff705f;
   color: white;
   justify-content: center;
   align-items: center;
   font-size: 2rem;
   display: none;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .loading--show {

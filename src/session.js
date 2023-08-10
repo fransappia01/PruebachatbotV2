@@ -2,12 +2,12 @@ const express = require('express');
 const qrcode = require('qrcode');
 const puppeteer = require("puppeteer");
 const { Client, LocalAuth } = require('whatsapp-web.js');
+const path = require('path');
 
 const app = express();
 let qrImage; // Variable para almacenar el código QR generado
 
 puppeteer.launch({ignoreDefaultArgs: ['--disable-extensions'], args: ['--no-sandbox','--disable-setuid-sandbox']})
-
 
 const client = new Client({
   clientId: "client-o",
@@ -36,7 +36,6 @@ client.on('qr', async qr => {
     // Genera el código QR como una imagen 
     qrImage = await qrcode.toDataURL(qr, { errorCorrectionLevel: 'L' });
 
-    // No es necesario enviar el código QR aquí
   } catch (error) {
     console.error('Error al generar el código QR:', error);
   }
@@ -53,14 +52,14 @@ client.initialize();
 // Ruta para obtener el código QR
 
 app.get('/codigoqr', (req, res) => {
-  console.log(qrImage)
+  // console.log(qrImage)
   if (qrImage) {
     // Si el cliente está listo, ya se generó el código QR y se envió en el evento 'qr'
     console.log('QR listo');
     res.send(`<img src="${qrImage}" alt="WhatsApp QR Code" />`);
   } else {
     // Si el cliente aún no está listo, envía un mensaje temporal
-    res.send(`<div class="loading loading--show">Cargando qr</div> `);
+    res.send(`<div class="loading loading--show">Cargando QR...</div> `);
   }
 });
 
