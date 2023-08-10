@@ -20,9 +20,10 @@
 
   <script>
 
+    // Defino variable para setear la bandera de la alerta de error
     var flag=false;
 
-    // Funcion para setear la flag y mostrar la alerta de error cada  vez que aprieta el boton
+    // Funcion para setear la flag y mostrar la alerta de error cada  vez que aprieta el boton, si es necesario
     function cont(){
       flag=true;
       obtenerCodigoQR();
@@ -32,15 +33,14 @@
     function obtenerCodigoQR() {
 
       const intervalo = setInterval(obtenerCodigoQR,20000);
-      // Mostrar mensaje "Generando código QR"
       document.getElementById('qrContainer').innerText = '.';
   
       // Realizar la solicitud para obtener el código QR utilizando fetch
       fetch('/codigoqr')
         .then(response => response.text())
         .then(qrHtml => {
+
           // Mostrar el código QR en el contenedor
-          // console.log("qrHtml",qrHtml)
           if(qrHtml!="."){
           document.getElementById('qrContainer').innerHTML = qrHtml;
         }
