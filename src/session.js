@@ -8,7 +8,7 @@ const app = express();
 let qrImage; // Variable para almacenar el código QR generado
 
 puppeteer.launch({
-  executablePath: '/usr/bin/chromium-browser',
+  executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
   ignoreDefaultArgs: ['--disable-extensions'],
   args: ['--no-sandbox', '--disable-setuid-sandbox',
   '--disable-gpu',
