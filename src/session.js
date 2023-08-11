@@ -3,6 +3,7 @@ const qrcode = require('qrcode');
 const puppeteer = require("puppeteer");
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const path = require('path');
+const chromium = require('chrome-aws-lambda');
 
 const app = express();
 let qrImage; // Variable para almacenar el código QR generado
@@ -17,7 +18,10 @@ puppeteer.launch({
   '--no-first-run',
   '--no-sandbox',
   '--no-zygote',
-  '--single-process',],
+  '--single-process',
+  ...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+  defaultViewport: chromium.defaultViewport,
+  ignoreHTTPSErrors: true,
   headless: true
   
 });
