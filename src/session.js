@@ -23,8 +23,8 @@ const client = new Client({
     extraHTTPHeaders: {
       'Accept-Language': 'en'
     },
-    executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe', // no se esta detectando
-    headless: true,
+    executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe', 
+    headless: 'new',
     devtools: false,
     userDataDir: null
   }
