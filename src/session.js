@@ -23,7 +23,7 @@ const client = new Client({
     extraHTTPHeaders: {
       'Accept-Language': 'en'
     },
-    executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe', 
+    executablePath: '.cache\\puppeteer\\chrome\\win64-1069273\\chrome-win\\chrome.exe', 
     headless: 'new',
     devtools: false,
     userDataDir: null
