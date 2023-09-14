@@ -1,5 +1,5 @@
 const { client } = require('./src/session')
-const { getSMS, getWorkshopNameByPhone, getAppointmentStatusByPhone } = require('./src/functions');
+const { getSMS, getWorkshopNameByPhone, GetStatusByAppointmentNumber } = require('./src/functions');
 
 // Variables para controlar el flujo de ejecución de la respuesta del taller, almaceno el cambio de estados.
 let isWaitingForWorkshopName = false;

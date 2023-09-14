@@ -6,21 +6,36 @@
  <!-- <link rel="stylesheet" type="text/css" href = "style.css"> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.6/dist/sweetalert2.min.css">
   <title>Código QR</title>
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/d/d7/Commons_QR_code.png">
 </head>
 <body>
   <div class="imagen-principal">
- <img src="https://lh5.googleusercontent.com/1EUXtbAhTRff0ncYlb7trU8jGZ0jBh2wGwcoXaQmvXe-NFmjFYaUZrQktvpZdlxrBxpu46w-wFURTt3r4GHLVR-Q2OXooMDNjU0DjJhlyf-t8rgBmFy8mFQOqYAO02Eclw=w1280" width="250" height="115"> 
+ <img src="https://tune-up-front-tesis-kfqmnfm6l-juanrojas091.vercel.app/assets/TuneLogo-transformed.png" width="250" height="115"> 
   </div>
   <div class="container">
     <div class="left-content">
       <h1>Generar código QR</h1>
       <button onclick="cont()">Obtener mi código QR</button>
+        </div>
+
+      <div id="instrucciones">
+        <h2>Instrucciones:</h2>
+        <ol>
+          <li>Abre WhatsApp.</li>
+          <li>Ve a Configuración &rarr; Dispositivos vinculados.</li>
+          <li>Pulsa "Vincular un dispositivo".</li>
+          <li>Escanea el código QR que aparecerá a continuación.</li>
+          <li>¡Tu ChatBot estará configurado para tu taller!</li>
+        </ol>
+      </div>
     </div>
     <div class="right-content">
-      <div id="qrContainer"></div>
+      <div id="qrContainer" ></div>
     </div>
-  </div>
 
+<footer style="text-align: center; margin-top: 595px; margin-right: 15px; color: white; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+  Powered by <span style="color: rgba(0, 0, 255, 0.482); font-weight: 600;">UCC</span>
+</footer>
   <script>
 
     // Defino variable para setear la bandera de la alerta de error
@@ -35,6 +50,7 @@
     // Funcion para generar el codigo QR
     function obtenerCodigoQR() {
 
+      document.getElementById('instrucciones').style.display = 'none';
       const intervalo = setInterval(obtenerCodigoQR,20000);
       document.getElementById('qrContainer').innerText = '.';
   

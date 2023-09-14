@@ -109,5 +109,5 @@ async function GetStatusByAppointmentNumber(appointment_number) {
   module.exports = {
     getSMS,
     getWorkshopNameByPhone,
-    getAppointmentStatusByPhone
+    GetStatusByAppointmentNumber
   };
