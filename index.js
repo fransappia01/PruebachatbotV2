@@ -8,13 +8,13 @@ let workshopName;
 
 
 client.on('message', async (msg) => {
-  const phone_number = msg.to.replace('@c.us', '');
+  const phone = msg.to.replace('@c.us', '');
 
   if (msg.body === '12345') {
-    console.log('phone', phone_number);
+    console.log('phone', phone);
 
     // Obtener el nombre del taller
-    workshopName = await getWorkshopNameByPhone(phone_number);
+    workshopName = await getWorkshopNameByPhone(phone);
 
     // Responder al mensaje del usuario
     await client.sendMessage(
@@ -51,7 +51,7 @@ client.on('message', async (msg) => {
             console.log('User response:', userResponse);
       
             // Lógica para obtener el estado del turno
-            const appointment_status = await getAppointmentStatusByPhone(userResponse);
+            const appointment_status = await GetStatusByAppointmentNumber(userResponse);
       
             if (appointment_status) {
               await client.sendMessage(msg.from, `El estado de tu turno es: ${appointment_status}`);
@@ -67,7 +67,7 @@ client.on('message', async (msg) => {
       case '3':
         // Lógica para términos y condiciones
 
-        const privacyPolicy = await getSMS(phone_number, workshopName);
+        const privacyPolicy = await getSMS(phone, workshopName);
 
         if (privacyPolicy) {
           await client.sendMessage(

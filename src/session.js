@@ -55,7 +55,7 @@ app.get('/codigoqr', (req, res) => {
   // console.log(qrImage)
   if (qrImage) {
     // Si el cliente está listo, ya se generó el código QR y se envió en el evento 'qr'
-    console.log('QR listo');
+    //console.log('QR listo');
     res.send(`<img src="${qrImage}" alt="WhatsApp QR Code" />`);
   } else {
     // Si el cliente aún no está listo, envía un mensaje temporal

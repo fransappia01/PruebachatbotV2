@@ -2,10 +2,10 @@ const { Agent } = require('https');
  
  // Funcion para traer politicas y privacidad de cada Taller por nombre de taller
  
- async function getSMS(phone_number, workshopName) {
+ async function getSMS(phone, workshopName) {
     // Configurar la URL de la API y los datos de la solicitud
-    const url = 'https://localhost:7097/api/Sms/GetSmsByWorkshop';
-    const data = { phone_number, name: workshopName};
+    const url = 'https://tuneupapp.somee.com/api/Sms/GetSmsByWorkshop';
+    const data = { phone, name: workshopName};
   
     try {
       // Importar dinámicamente el módulo node-fetch
@@ -34,9 +34,9 @@ const { Agent } = require('https');
   
   // Funcion que trae el nombre del taller por numero de telefono asociado
 
- async function getWorkshopNameByPhone(phone_number) {
+ async function getWorkshopNameByPhone(phone) {
     // Configurar la URL de la API con los parámetros de consulta
-    const url = `https://localhost:7097/api/Sms/GetWorkshopNameByPhone?phone_number=${phone_number}`;
+    const url = `https://tuneupapp.somee.com/api/Sms/GetWorkshopNameByPhone?phone=${phone}`;
   
     try {
       // Importar dinámicamente el módulo node-fetch
@@ -71,9 +71,9 @@ const { Agent } = require('https');
 
 // Funcion para traer el estado de un turno en base al numero de turno que le pasa el usuario
 
-async function getAppointmentStatusByPhone(appointment_number) {
+async function GetStatusByAppointmentNumber(appointment_number) {
   // Configurar la URL de la API con los parámetros de consulta
-  const url = `https://localhost:7097/api/Sms/GetAppointmentStatusByAppointmentNumber?appointment_number=${appointment_number}`;
+  const url = `https://tuneupapp.somee.com/api/Sms/GetStatusByAppointmentNumber?appointment_number=${appointment_number}`;
 
   try {
     // Importar dinámicamente el módulo node-fetch
